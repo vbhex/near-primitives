@@ -558,6 +558,8 @@ pub struct CreateRsa2048ChallengeAction {
     /// real miner request to create rsa2048 challenge
     /// Public key used to sign this rsa keys action.
     pub public_key: PublicKey,
+    /// Challenge key used to bind ValidatorPower
+    pub challenge_key: PublicKey,
     /// attach args such as Miner id, sequence number，power，etc.
     #[serde_as(as = "Base64")]
     pub args: Vec<u8>,
@@ -567,6 +569,7 @@ impl fmt::Debug for CreateRsa2048ChallengeAction {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.debug_struct("CreateRsa2048ChallengeAction")
             .field("public_key", &format_args!("{}", &self.public_key))
+            .field("challenge_key", &format_args!("{}", &self.challenge_key))
             .field("args", &format_args!("{}", AbbrBytes(&self.args)))
             .finish()
     }
